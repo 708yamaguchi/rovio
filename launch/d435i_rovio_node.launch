@@ -1,20 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <launch>
-  <!-- <node name="rvizvisualisation" pkg="rviz" type="rviz" args="-d $(find rovio)/cfg/rovio_rviz_config.rviz" /> -->
-  <!-- <node name="trajectory" pkg="hector_trajectory_server" type="hector_trajectory_server" /> -->
+  <arg name="resize" default="false" />
+  <arg name="infra1_ns" default="camera/infra1"/>
+  <arg name="infra2_ns" default="camera/infra2"/>
 
+  <group if="$(arg resize)">
+    <include file="$(find resized_image_transport)/launch/resized_image_transport.launch">
+      <arg name="INPUT_IMAGE" value="image_rect_raw" />
+      <arg name="CAMERA_NS" value="$(arg infra1_ns)" />
+      <arg name="OUTPUT_IMAGE" value="image_resized" />
+      <arg name="RESIZE_RATE" value="0.5" />
+      <arg name="NAME" value="cam0_resizer" />
+    </include>
+    <param name="$(arg infra1_ns)/cam0_resizer/use_camera_info" value="false" />
+    <include file="$(find resized_image_transport)/launch/resized_image_transport.launch">
+      <arg name="INPUT_IMAGE" value="image_rect_raw" />
+      <arg name="CAMERA_NS" value="camera/infra2" />
+      <arg name="OUTPUT_IMAGE" value="image_resized" />
+      <arg name="RESIZE_RATE" value="0.5" />
+      <arg name="NAME" value="cam1_resizer" />
+    </include>
+    <param name="$(arg infra2_ns)/cam1_resizer/use_camera_info" value="false" />
+  </group>
+
+
+  <!-- At the start of the program, stereo matching feature points may appear far away. 
+       Please hold the camera for a few seconds motionless in front of feature points. -->
+  <!-- Stereo matching accuracy can be improved by adjusting the brightness of the camera image. -->
+  <!-- For adjusting detail, see d435i.launch -->
+  <!-- You can reset the odometry pose (not stereo matching?) by rosservice call /rovio/reset -->
+  <!-- Due to radxa hardware, 640x480 stereo image with 6 fps is suitable. (15Hz is too high) -->
+  <!-- If stereo image fps is low (< 20Hz), move the camera slowly to avoid losing odometry-->
   <node pkg="rovio" type="rovio_node" name="rovio" output="screen">
     <param name="filter_config" value="$(find rovio)/cfg/d435i_rovio.info"/>
-    <param name="camera0_config" value="$(find rovio)/cfg/rovio_cam1.yaml"/>
-    <param name="camera1_config" value="$(find rovio)/cfg/rovio_cam2.yaml"/>
+    <param if="$(arg resize)"
+           name="camera0_config" value="$(find rovio)/cfg/d435i_resized_cam1.yaml"/>
+    <param if="$(arg resize)"
+	   name="camera1_config" value="$(find rovio)/cfg/d435i_resized_cam2.yaml"/>
+    <param unless="$(arg resize)"
+	   name="camera0_config" value="$(find rovio)/cfg/rovio_cam1.yaml"/>
+    <param unless="$(arg resize)"
+	   name="camera1_config" value="$(find rovio)/cfg/rovio_cam2.yaml"/>
     <rosparam>
       map_frame: map
       world_frame: world
       camera_frame: camera_infra1_optical_frame
       imu_frame: camera_imu_optical_frame
-    </rosparam>"
-    <remap from="/cam0/image_raw" to="/camera/infra1/image_rect_raw"/>
-    <remap from="/cam1/image_raw" to="/camera/infra2/image_rect_raw"/>
-    <remap from="/imu0" to="/camera/imu"/>
+    </rosparam>
+    <remap if="$(arg resize)" from="cam0/image_raw" to="$(arg infra1_ns)/image_resized" />
+    <remap if="$(arg resize)" from="cam1/image_raw" to="$(arg infra2_ns)/image_resized" />
+    <remap unless="$(arg resize)" from="cam0/image_raw" to="$(arg infra1_ns)/image_rect_raw"/>
+    <remap unless="$(arg resize)" from="cam1/image_raw" to="$(arg infra2_ns)/image_rect_raw"/>
+    <remap from="imu0" to="camera/imu"/>
   </node>
 </launch>

@@ -1,0 +1,12 @@
+image_width: 240
+image_height: 135
+camera_name: cam2
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [119.4, 0.0, 120.07, 0.0, 119.4, 68.178, 0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.006236, -0.004139, 0.001870, 0.002057, 0.000000]

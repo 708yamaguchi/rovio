@@ -12,10 +12,11 @@
   <arg name="depth_height"        default="480"/>
   <arg name="enable_depth"        default="false"/>
 
-  <!-- <arg name="infra_width"        default="640"/> -->
-  <!-- <arg name="infra_height"       default="480"/> -->
-  <arg name="infra_width"        default="480"/>
-  <arg name="infra_height"       default="270"/>
+  <!-- USB2.0 mode -->
+  <arg name="infra_width"        default="640"/>
+  <arg name="infra_height"       default="480"/>
+  <!-- <arg name="infra_width"        default="480"/> -->
+  <!-- <arg name="infra_height"       default="270"/> -->
   <arg name="enable_infra"       default="true"/>
   <arg name="enable_infra1"       default="true"/>
   <arg name="enable_infra2"       default="true"/>
@@ -26,7 +27,7 @@
 
   <arg name="fisheye_fps"         default="30"/>
   <arg name="depth_fps"           default="30"/>
-  <arg name="infra_fps"          default="30"/>
+  <arg name="infra_fps"          default="6"/>
   <arg name="color_fps"           default="30"/>
   <arg name="gyro_fps"            default="400"/>
   <arg name="accel_fps"           default="250"/>
@@ -48,6 +49,11 @@
   <arg name="hold_back_imu_for_frames"      default="true"/>
   
   <group ns="$(arg camera)">
+    <!-- Image brightness is very important for stereo matching. -->
+    <!-- You need to adjust the exposure and gain parameters for each environment -->
+    <!-- The success or failure of matching can be checked via /rovio/markers on RViz -->
+    <!-- If the matching fails, 
+         the markers representing the feature point extend longer than they actually are -->
     <param name="stereo_module/exposure" value="3000" />
     <param name="stereo_module/gain" value="70" />
     <param name="stereo_module/emitter_enabled" value="0" />
