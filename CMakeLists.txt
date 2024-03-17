@@ -16,7 +16,8 @@ add_subdirectory(lightweight_filtering)
 
 ##################### Find, include, and compile library #####################
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-if(0)
+# Set 0 if you do not use OpenMP.
+if(1)
 	find_package(OpenMP REQUIRED)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
