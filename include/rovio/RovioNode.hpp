@@ -205,9 +205,15 @@ class RovioNode{
     gotFirstMessages_ = false;
 
     // Subscribe topics
-    subImu_ = nh_.subscribe("imu0", 1000, &RovioNode::imuCallback,this);
-    subImg0_ = nh_.subscribe("cam0/image_raw", 1000, &RovioNode::imgCallback0,this);
-    subImg1_ = nh_.subscribe("cam1/image_raw", 1000, &RovioNode::imgCallback1,this);
+    int imuQueueSize = 1000;
+    nh_private_.param("imu_queue_size", imuQueueSize, imuQueueSize);
+    subImu_ = nh_.subscribe("imu0", imuQueueSize, &RovioNode::imuCallback,this);
+    int cam0QueueSize = 1000;
+    nh_private_.param("cam0_queue_size", cam0QueueSize, cam0QueueSize);
+    subImg0_ = nh_.subscribe("cam0/image_raw", cam0QueueSize, &RovioNode::imgCallback0,this);
+    int cam1QueueSize = 1000;
+    nh_private_.param("cam1_queue_size", cam1QueueSize, cam1QueueSize);
+    subImg1_ = nh_.subscribe("cam1/image_raw", cam1QueueSize, &RovioNode::imgCallback1,this);
     subGroundtruth_ = nh_.subscribe("pose", 1000, &RovioNode::groundtruthCallback,this);
     subGroundtruthOdometry_ = nh_.subscribe("odometry", 1000, &RovioNode::groundtruthOdometryCallback, this);
     subVelocity_ = nh_.subscribe("abss/twist", 1000, &RovioNode::velocityCallback,this);

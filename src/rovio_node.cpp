@@ -44,17 +44,22 @@
 #include "rovio/RovioScene.hpp"
 #endif
 
-#ifdef ROVIO_NMAXFEATURE
-static constexpr int nMax_ = ROVIO_NMAXFEATURE;
-#else
-static constexpr int nMax_ = 25; // Maximal number of considered features in the filter state.
-#endif
+// Reduce system load for Radxa. This allow 640x480 15fps stereo input.
+// For detail, see https://github.com/ethz-asl/rovio/issues/27#issuecomment-165108237
 
-#ifdef ROVIO_NLEVELS
-static constexpr int nLevels_ = ROVIO_NLEVELS;
-#else
-static constexpr int nLevels_ = 4; // // Total number of pyramid levels considered.
-#endif
+// #ifdef ROVIO_NMAXFEATURE
+// static constexpr int nMax_ = ROVIO_NMAXFEATURE;
+// #else
+// static constexpr int nMax_ = 25; // Maximal number of considered features in the filter state.
+// #endif
+static constexpr int nMax_ = 15; // Maximal number of considered features in the filter state.
+
+// #ifdef ROVIO_NLEVELS
+// static constexpr int nLevels_ = ROVIO_NLEVELS;
+// #else
+// static constexpr int nLevels_ = 4; // // Total number of pyramid levels considered.
+// #endif
+static constexpr int nLevels_ = 3; // // Total number of pyramid levels considered.
 
 #ifdef ROVIO_PATCHSIZE
 static constexpr int patchSize_ = ROVIO_PATCHSIZE;
