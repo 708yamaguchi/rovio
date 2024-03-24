@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Mainly copied from
 # https://github.com/adafruit/circuitpython/issues/8814#issuecomment-1913724609
 

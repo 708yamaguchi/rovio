@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<launch>
-  <!-- Publish /imu from AtomS3 -->
-  <node pkg="rovio" type="MPU6886.py" name="mpu6886_imu_publisher" output="screen" />
-  
+<launch>  
   <!-- At the start of the program, stereo matching feature points may appear far away. 
        Please hold the camera for a few seconds motionless in front of feature points. -->
   <!-- Stereo matching accuracy can be improved by adjusting the brightness of the camera image. -->
@@ -20,7 +17,7 @@
       camera_frame: camera_color_optical_frame <!-- or camera_infra2_optical_frame -->
       imu_frame: imu_frame
     </rosparam>
-    <remap from="cam0/image_raw" to="camera/color/image_raw"/>
+    <remap from="cam0/image_raw" to="camera/gray/image_raw"/>
     <remap from="cam1/image_raw" to="camera/infra2/image_rect_raw"/>
     <remap from="imu0" to="imu"/>
   </node>

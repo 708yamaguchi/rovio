@@ -1,4 +1,13 @@
 <launch>
+
+  <!-- Publish /imu from AtomS3 -->
+  <node pkg="rovio" type="MPU6886.py" name="mpu6886_imu_publisher" output="screen" />
+
+  <node pkg="rovio" type="image_to_gray.py" name="image_to_gray" output="screen">
+    <remap from="input" to="camera/color/image_raw" />
+    <remap from="output" to="camera/gray/image_raw" />
+  </node>
+
   <arg name="serial_no"           default=""/>
   <arg name="json_file_path"      default="/home/naoya/emitter_disabled_60fps.json"/>
   <arg name="camera"              default="camera"/>
@@ -23,7 +32,7 @@
 
   <arg name="color_width"         default="640"/>
   <arg name="color_height"        default="480"/>
-  <arg name="enable_color"        default="false"/>
+  <arg name="enable_color"        default="true"/>
 
   <arg name="fisheye_fps"         default="30"/>
   <arg name="depth_fps"           default="30"/>
