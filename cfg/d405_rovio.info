@@ -6,7 +6,7 @@ Common
     depthType 1;                                                Type of depth parametrization (0: normal, 1: inverse depth, 2: log, 3: hyperbolic)
     verbose false;                                              Is the verbose active
 }
-Camera1
+Camera0
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
   qCM_x  -0.028591323265346774;                               X-entry of IMU to Camera quaterion (Hamilton)
@@ -17,7 +17,7 @@ Camera1
   MrMC_y -0.0657566180815051;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
   MrMC_z 0.059140421744688476;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
 }
-Camera2
+Camera1
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
   qCM_x  -0.028238417357916837;                               X-entry of IMU to Camera quaterion (Hamilton)
