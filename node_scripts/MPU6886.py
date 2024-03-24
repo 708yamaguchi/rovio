@@ -7,6 +7,7 @@ import board
 import busio
 import time
 
+import numpy as np
 import rospy
 from sensor_msgs.msg import Imu
 
@@ -138,9 +139,9 @@ class PublishMPU6886(object):
         imu_msg.header.frame_id = 'imu_frame'
         gx, gy, gz = self.m.gyro()
         ax, ay, az = self.m.acceleration()
-        imu_msg.angular_velocity.x = gx
-        imu_msg.angular_velocity.y = gy
-        imu_msg.angular_velocity.z = gz
+        imu_msg.angular_velocity.x = np.deg2rad(gx)
+        imu_msg.angular_velocity.y = np.deg2rad(gy)
+        imu_msg.angular_velocity.z = np.deg2rad(gz)
         imu_msg.linear_acceleration.x = ax
         imu_msg.linear_acceleration.y = ay
         imu_msg.linear_acceleration.z = az
