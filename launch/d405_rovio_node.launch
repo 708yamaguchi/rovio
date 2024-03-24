@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<launch>  
+<launch>
   <!-- At the start of the program, stereo matching feature points may appear far away. 
        Please hold the camera for a few seconds motionless in front of feature points. -->
   <!-- Stereo matching accuracy can be improved by adjusting the brightness of the camera image. -->

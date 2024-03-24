@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Mainly copied from
 # https://gist.github.com/awesomebytes/df2d4fe59774ee9d3f0b576fb5f0374f
@@ -24,6 +24,7 @@ class GrayScaler(object):
 
     def image_cb(self, img_msg):
         # Transform to cv2/numpy image
+        header = img_msg.header
         img_in_cv2 = self.cv_bridge.imgmsg_to_cv2(
             img_msg, desired_encoding='passthrough')
         # Transform to grayscale,
@@ -35,6 +36,7 @@ class GrayScaler(object):
         # Transform back to Image message
         gray_img_msg = self.cv_bridge.cv2_to_imgmsg(
             gray_img, encoding="mono8")
+        gray_img_msg.header = header
         self.pub.publish(gray_img_msg)
 
 
