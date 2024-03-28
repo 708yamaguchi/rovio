@@ -1,13 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <!-- At the start of the program, stereo matching feature points may appear far away. 
+
+  <!-- Use this parameter 5.0s if you want to start rovio after D405 and IMU topics are published -->
+  <arg name="rovio_start_delay" default="0.0" />
+
+  <!-- At the start of the program, stereo matching feature points may appear far away.
        Please hold the camera for a few seconds motionless in front of feature points. -->
   <!-- Stereo matching accuracy can be improved by adjusting the brightness of the camera image. -->
   <!-- For adjusting detail, see d435i.launch -->
   <!-- You can reset the odometry pose (not stereo matching?) by rosservice call /rovio/reset -->
   <!-- Due to radxa hardware, 640x480 stereo image with 6 fps is suitable. (15Hz is too high) -->
   <!-- If stereo image fps is low (< 20Hz), move the camera slowly to avoid losing odometry-->
-  <node pkg="rovio" type="rovio_node" name="rovio" output="screen">
+  <node pkg="rovio" type="rovio_node" name="rovio" output="screen"
+        launch-prefix="bash -c 'sleep $(arg rovio_start_delay); $0 $@' "	>
     <param name="filter_config" value="$(find rovio)/cfg/d405_rovio.info"/>
     <param name="camera0_config" value="$(find rovio)/cfg/d405_cam1.yaml"/>
     <param name="camera1_config" value="$(find rovio)/cfg/d405_cam2.yaml"/>
