@@ -168,7 +168,7 @@ if __name__ == '__main__':
     i2c1 = busio.I2C(board.SCL1, board.SDA1, frequency=400_000)
     rospy.init_node('mpu6886')
     pm = PublishMPU6886(i2c1)
-    freq = rospy.get_param('~frequency', 100)
+    freq = float(rospy.get_param('~sampling_frequency', 100))
     r = rospy.Rate(freq)
     time.sleep(1)
     while not rospy.is_shutdown():

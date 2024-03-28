@@ -1,15 +1,17 @@
 <launch>
 
+  <arg name="sampling_frequency" default="100" />
+
   <!-- Publish /imu from AtomS3 -->
   <node pkg="rovio" type="mpu6886.py" name="mpu6886_imu_publisher" output="screen">
-    <rosparam>
-      frequency: 100
+    <rosparam subst_value="true">
+      sampling_frequency: $(arg sampling_frequency)
     </rosparam>
   </node>
 
   <!-- /imu -> /imu_filtered -->
   <node pkg="rovio" type="imu_low_pass_filter.py" name="imu_low_pass_filter" >
-    <rosparam>
+    <rosparam subst_value="true">
       alpha: 1
     </rosparam>
   </node>
