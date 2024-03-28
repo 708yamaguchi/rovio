@@ -19,6 +19,6 @@
     </rosparam>
     <remap from="cam0/image_raw" to="camera/gray/image_raw"/>
     <remap from="cam1/image_raw" to="camera/infra2/image_rect_raw"/>
-    <remap from="imu0" to="imu"/>
+    <remap from="imu0" to="imu_filtered"/>
   </node>
 </launch>

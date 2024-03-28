@@ -1,0 +1,7 @@
+<launch>
+
+  <launch file="$(find rovio)/launch/d405.launch" />
+  <launch file="$(find rovio)/launch/d405_rovio_node.launch" />
+  <launch file="$(find rovio)/launch/mpu6886.launch" />
+
+</launch>
