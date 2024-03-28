@@ -82,14 +82,18 @@ class MPU6886:
         self._write_register(self._GYRO_CONFIG, self.GYRO_FS_SEL_250DPS)  # Set gyroscope range
 
     def _write_register(self, register, value):
+        self.i2c.unlock()
         while not self.i2c.try_lock():
             pass
         try:
             self.i2c.writeto(self.address, bytes([register, value]))
-        finally:
-            self.i2c.unlock()
+        except TimeoutError, OSError as e:
+            print(e)
+        # finally:
+        #     self.i2c.unlock()
 
     def _read_register(self, register, length):
+        self.i2c.unlock()
         while not self.i2c.try_lock():
             pass
         try:
@@ -97,8 +101,10 @@ class MPU6886:
             data = bytearray(length)
             self.i2c.readfrom_into(self.address, data)
             return data
-        finally:
-            self.i2c.unlock()
+        except TimeoutError, OSError as e:
+            print(e)
+        # finally:
+        #     self.i2c.unlock()
 
     def acceleration(self):
         data = self._read_register(self._ACCEL_XOUT_H, 6)

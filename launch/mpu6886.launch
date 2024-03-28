@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- Publish /imu from AtomS3 -->
+  <node pkg="rovio" type="mpu6886.py" name="mpu6886_imu_publisher" output="screen" />
+
+  <!-- /imu -> /imu_filtered -->
+  <node pkg="rovio" type="imu_low_pass_filter.py">
+    <param name="alpha" value="0.1" />
+  </node>
+
+</launch>

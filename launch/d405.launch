@@ -1,8 +1,5 @@
 <launch>
 
-  <!-- Publish /imu from AtomS3 -->
-  <node pkg="rovio" type="MPU6886.py" name="mpu6886_imu_publisher" output="screen" />
-
   <node pkg="rovio" type="image_to_gray.py" name="image_to_gray" output="screen">
     <remap from="input" to="camera/color/image_raw" />
     <remap from="output" to="camera/gray/image_raw" />
