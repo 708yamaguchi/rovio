@@ -10,9 +10,12 @@
   </node>
 
   <!-- /imu -> /imu_filtered -->
-  <node pkg="rovio" type="imu_low_pass_filter.py" name="imu_low_pass_filter" >
+  <node pkg="rovio" type="imu_filter.py" name="imu_filter" >
     <rosparam subst_value="true">
-      alpha: 1
+      filter_type: band_pass
+      sampling_frequency: 100
+      cutoff_frequency: 82
+      cutoff_bandwidth: 0.3
     </rosparam>
   </node>
 
