@@ -87,8 +87,8 @@ class MPU6886:
             pass
         try:
             self.i2c.writeto(self.address, bytes([register, value]))
-        except TimeoutError, OSError as e:
-            print(e)
+        except (TimeoutError, OSError) as e:
+            rospy.logerr(e)
         # finally:
         #     self.i2c.unlock()
 
@@ -101,13 +101,15 @@ class MPU6886:
             data = bytearray(length)
             self.i2c.readfrom_into(self.address, data)
             return data
-        except TimeoutError, OSError as e:
-            print(e)
+        except (TimeoutError, OSError) as e:
+            rospy.logerr(e)
         # finally:
         #     self.i2c.unlock()
 
     def acceleration(self):
         data = self._read_register(self._ACCEL_XOUT_H, 6)
+        if data is None:
+            return (None, None, None)
         ax = self._combine_bytes(data[0], data[1]) / self._ACCEL_SO_2G * self.SF_M_S2
         ay = self._combine_bytes(data[2], data[3]) / self._ACCEL_SO_2G * self.SF_M_S2
         az = self._combine_bytes(data[4], data[5]) / self._ACCEL_SO_2G * self.SF_M_S2
@@ -115,6 +117,8 @@ class MPU6886:
 
     def gyro(self):
         data = self._read_register(self._GYRO_XOUT_H, 6)
+        if data is None:
+            return (None, None, None)
         gx = self._combine_bytes(data[0], data[1]) / self._GYRO_SO_250DPS  # Adjust sensitivity factor based on your configuration
         gy = self._combine_bytes(data[2], data[3]) / self._GYRO_SO_250DPS
         gz = self._combine_bytes(data[4], data[5]) / self._GYRO_SO_250DPS
@@ -122,6 +126,8 @@ class MPU6886:
 
     def temperature(self):
         data = self._read_register(self._TEMP_OUT_H, 2)
+        if data is None:
+            return (None, None, None)
         temp_raw = self._combine_bytes(data[0], data[1])
         temperature = (temp_raw / self._TEMP_SO) + self._TEMP_OFFSET
         return temperature
@@ -144,6 +150,9 @@ class PublishMPU6886(object):
         imu_msg.header.frame_id = 'imu_frame'
         gx, gy, gz = self.m.gyro()
         ax, ay, az = self.m.acceleration()
+        if None in [gx, gy, gz, ax, ay, az]:
+            rospy.logerr('Do not publish IMU data because no data come.')
+            return
         deg2rad = 0.017453292519943295
         imu_msg.angular_velocity.x = deg2rad * gx
         imu_msg.angular_velocity.y = deg2rad * gy
@@ -159,7 +168,8 @@ if __name__ == '__main__':
     i2c1 = busio.I2C(board.SCL1, board.SDA1, frequency=400_000)
     rospy.init_node('mpu6886')
     pm = PublishMPU6886(i2c1)
-    r = rospy.Rate(100)
+    freq = rospy.get_param('~frequency', 100)
+    r = rospy.Rate(freq)
     time.sleep(1)
     while not rospy.is_shutdown():
         pm.publish()

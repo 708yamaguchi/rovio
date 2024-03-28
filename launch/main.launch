@@ -1,7 +1,7 @@
 <launch>
 
-  <launch file="$(find rovio)/launch/d405.launch" />
-  <launch file="$(find rovio)/launch/d405_rovio_node.launch" />
-  <launch file="$(find rovio)/launch/mpu6886.launch" />
+  <include file="$(find rovio)/launch/d405.launch" />
+  <include file="$(find rovio)/launch/d405_rovio_node.launch" />
+  <include file="$(find rovio)/launch/mpu6886.launch" />
 
 </launch>
