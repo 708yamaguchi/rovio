@@ -7,29 +7,53 @@ Common
     verbose false;                                              Is the verbose active
 }
 
-;; D405 front(positive z-axis) oriented the same way as the IMU positive y-axis
+;; IMU is 45 degrees diagonally from D405
 Camera0
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
-  qCM_x  0.46740833753151967;                               X-entry of IMU to Camera quaterion (Hamilton)
-  qCM_y  -0.5114418729875407;                               Y-entry of IMU to Camera quaterion (Hamilton)
-  qCM_z  -0.5342704963322004;                               Z-entry of IMU to Camera quaterion (Hamilton)
-  qCM_w  0.4842640739410281;                               W-entry of IMU to Camera quaterion (Hamilton)
-  MrMC_x -0.0029066323564841626;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_y 0.029414495586271194;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_z 0.0013264083398603667;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  qCM_x  0.2687823967798962;                               X-entry of IMU to Camera quaterion (Hamilton)
+  qCM_y  -0.6399118019696174;                               Y-entry of IMU to Camera quaterion (Hamilton)
+  qCM_z  0.6761065664538819;                               Z-entry of IMU to Camera quaterion (Hamilton)
+  qCM_w  0.24728287380891184;                               W-entry of IMU to Camera quaterion (Hamilton)
+  MrMC_x 0.01482783190459383;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_y -0.016987695452398286;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_z 0.0019796723596452598;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
 }
 Camera1
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
-  qCM_x  0.4672591444255523;                               X-entry of IMU to Camera quaterion (Hamilton)
-  qCM_y  -0.5108288163919145;                               Y-entry of IMU to Camera quaterion (Hamilton)
-  qCM_z  -0.5339322562080071;                               Z-entry of IMU to Camera quaterion (Hamilton)
-  qCM_w  0.485426779313795;                               W-entry of IMU to Camera quaterion (Hamilton)
-  MrMC_x -0.0046076495860337685;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_y 0.03017050843449745;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_z -0.01652562140530909;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  qCM_x  0.2698547523458734;                               X-entry of IMU to Camera quaterion (Hamilton)
+  qCM_y  -0.6391308312670224;                               Y-entry of IMU to Camera quaterion (Hamilton)
+  qCM_z  0.6764285827929201;                               Z-entry of IMU to Camera quaterion (Hamilton)
+  qCM_w  0.24725405060591865;                               W-entry of IMU to Camera quaterion (Hamilton)
+  MrMC_x 0.0017013202359325089;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_y -0.029200910764283536;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_z 0.0028115643412551204;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
 }
+
+;; D405 front(positive z-axis) oriented the same way as the IMU positive y-axis
+;Camera0
+;{
+;  CalibrationFile  ;            Camera-Calibration file for intrinsics
+;  qCM_x  0.46740833753151967;                               X-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_y  -0.5114418729875407;                               Y-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_z  -0.5342704963322004;                               Z-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_w  0.4842640739410281;                               W-entry of IMU to Camera quaterion (Hamilton)
+;  MrMC_x -0.0029066323564841626;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_y 0.029414495586271194;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_z 0.0013264083398603667;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;}
+;Camera1
+;{
+;  CalibrationFile  ;            Camera-Calibration file for intrinsics
+;  qCM_x  0.4672591444255523;                               X-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_y  -0.5108288163919145;                               Y-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_z  -0.5339322562080071;                               Z-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_w  0.485426779313795;                               W-entry of IMU to Camera quaterion (Hamilton)
+;  MrMC_x -0.0046076495860337685;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_y 0.03017050843449745;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_z -0.01652562140530909;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;}
 
 ;; D405 front(positive z-axis) oriented the same way as the IMU positive x-axis
 ;Camera0
@@ -179,18 +203,18 @@ Prediction
         vel_0 4e-5; 4e-6            X-covariance parameter of velocity prediction [m^2/s^3]
         vel_1 4e-5;               Y-covariance parameter of velocity prediction [m^2/s^3]
         vel_2 4e-5;               Z-covariance parameter of velocity prediction [m^2/s^3]
-        ; acb_0 1e-8;               X-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        ; acb_1 1e-8;               Y-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        ; acb_2 1e-8;               Z-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        ; gyb_0 3.8e-7;             X-covariance parameter of gyroscope bias prediction [rad^2/s^3]
-        ; gyb_1 3.8e-7;             Y-covariance parameter of gyroscope bias prediction [rad^2/s^3]
-        ; gyb_2 3.8e-7;             Z-covariance parameter of gyroscope bias prediction [rad^2/s^3]
-        acb_0 1e-5;               X-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        acb_1 1e-5;               Y-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        acb_2 1e-5;               Z-covariance parameter of accelerometer bias prediction [m^2/s^5]
-        gyb_0 3.8e-6;             X-covariance parameter of gyroscope bias prediction [rad^2/s^3]
-        gyb_1 3.8e-6;             Y-covariance parameter of gyroscope bias prediction [rad^2/s^3]
-        gyb_2 3.8e-6;             Z-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        acb_0 1e-8;               X-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        acb_1 1e-8;               Y-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        acb_2 1e-8;               Z-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        gyb_0 3.8e-7;             X-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        gyb_1 3.8e-7;             Y-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        gyb_2 3.8e-7;             Z-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        ; acb_0 1e-5;               X-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        ; acb_1 1e-5;               Y-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        ; acb_2 1e-5;               Z-covariance parameter of accelerometer bias prediction [m^2/s^5]
+        ; gyb_0 3.8e-6;             X-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        ; gyb_1 3.8e-6;             Y-covariance parameter of gyroscope bias prediction [rad^2/s^3]
+        ; gyb_2 3.8e-6;             Z-covariance parameter of gyroscope bias prediction [rad^2/s^3]
         vep 1e-8;               Covariance parameter of linear extrinsics prediction [m^2/s]
         att_0 7.6e-7; 7.6e-7          X-Covariance parameter of attitude prediction [rad^2/s]
         att_1 7.6e-7;             Y-Covariance parameter of attitude prediction [rad^2/s]
