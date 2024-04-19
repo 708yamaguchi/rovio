@@ -8,28 +8,54 @@ Common
 }
 
 ;; IMU is on PINCH teaching module
+;; IMU is 45 degrees diagonally from D405
 Camera0
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
-  qCM_x  0.4787628682784406;                               X-entry of IMU to Camera quaterion (Hamilton)
-  qCM_y  0.47218910621819;                               Y-entry of IMU to Camera quaterion (Hamilton)
-  qCM_z  -0.5297620091724426;                               Z-entry of IMU to Camera quaterion (Hamilton)
-  qCM_w  0.5168904889473634;                               W-entry of IMU to Camera quaterion (Hamilton)
-  MrMC_x -0.027598761831721816;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_y 0.0008543284148297792;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_z -0.00037581243943354825;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  qCM_x  0.2583932272477578;                               X-entry of IMU to Camera quaterion (Hamilton)
+  qCM_y  0.6146562454759752;                               Y-entry of IMU to Camera quaterion (Hamilton)
+  qCM_z  -0.6966918424089448;                               Z-entry of IMU to Camera quaterion (Hamilton)
+  qCM_w  0.26467171501823994;                               W-entry of IMU to Camera quaterion (Hamilton)
+  MrMC_x -0.008063804873530964;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_y -0.0030548297262539097;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_z 0.004881834895447423;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
 }
 Camera1
 {
   CalibrationFile  ;            Camera-Calibration file for intrinsics
-  qCM_x  0.47762333497907855;                               X-entry of IMU to Camera quaterion (Hamilton)
-  qCM_y  0.47284115567101015;                               Y-entry of IMU to Camera quaterion (Hamilton)
-  qCM_z  -0.5298541454842522;                               Z-entry of IMU to Camera quaterion (Hamilton)
-  qCM_w  0.5172540728697257;                               W-entry of IMU to Camera quaterion (Hamilton)
-  MrMC_x -0.027779224512522394;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_y 0.018798796161302964;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
-  MrMC_z -0.0007272261936564356;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  qCM_x  0.25709268414402997;                               X-entry of IMU to Camera quaterion (Hamilton)
+  qCM_y  0.6148067681666799;                               Y-entry of IMU to Camera quaterion (Hamilton)
+  qCM_z  -0.6969213478330675;                               Z-entry of IMU to Camera quaterion (Hamilton)
+  qCM_w  0.2649841967185988;                               W-entry of IMU to Camera quaterion (Hamilton)
+  MrMC_x -0.021135948521353285;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_y 0.00922858766094026;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+  MrMC_z 0.004251994598018413;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
 }
+
+;; IMU is on PINCH teaching module
+;; D405 front(positive z-axis) oriented the same way as the IMU negative x-axis
+;Camera0
+;{
+;  CalibrationFile  ;            Camera-Calibration file for intrinsics
+;  qCM_x  0.4787628682784406;                               X-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_y  0.47218910621819;                               Y-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_z  -0.5297620091724426;                               Z-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_w  0.5168904889473634;                               W-entry of IMU to Camera quaterion (Hamilton)
+;  MrMC_x -0.027598761831721816;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_y 0.0008543284148297792;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_z -0.00037581243943354825;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;}
+;Camera1
+;{
+;  CalibrationFile  ;            Camera-Calibration file for intrinsics
+;  qCM_x  0.47762333497907855;                               X-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_y  0.47284115567101015;                               Y-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_z  -0.5298541454842522;                               Z-entry of IMU to Camera quaterion (Hamilton)
+;  qCM_w  0.5172540728697257;                               W-entry of IMU to Camera quaterion (Hamilton)
+;  MrMC_x -0.027779224512522394;                               X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_y 0.018798796161302964;                               Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;  MrMC_z -0.0007272261936564356;                               Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+;}
 
 ;; IMU is on SUCTION teaching module
 ;; IMU is 45 degrees diagonally from D405
